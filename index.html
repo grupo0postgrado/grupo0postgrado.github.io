@@ -16,147 +16,394 @@
 
     <!-- Theme CSS -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
+    <link href="css/clean-blog.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-            </div>
-            <!-- /.navbar-collapse -->
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href="index.html">Blog Grupo 0</a>
         </div>
-        <!-- /.container -->
-    </nav>
 
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header">
-        <img class="header-background" src="img/portada_bicing.jpg"/>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-heading">
-                        <h1>Bike Availability Prediction</h1>
-                        <h2 class="subheading">Bitácora de trabajo - Grupo 0 postgrado</h2>
-                        <span class="meta">Fecha: <a href="#">Start Bootstrap</a> 26 de junio, 2024</span>
-                    </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#processing">Processing</a>
+                </li>
+                <li>
+                    <a href="#enrichment">Enrichment</a>
+                </li>
+                <li>
+                    <a href="#explore">Exploration</a>
+                </li>
+                <li>
+                    <a href="#prediction">Prediction</a>
+                </li>
+                <li>
+                    <a href="#cases">Study Cases</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header">
+    <img class="header-background" src="img/portada_bicing.jpg"/>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Bike Availability Prediction</h1>
+                    <h2 class="subheading">Introduction to Data Science and Machine Learning</h2>
+                    <span class="meta">Universitat de Barcelona, 26 de junio 2024</span>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
-    <!-- Post Content -->
-    <article>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>The purpose of this research is to predict the percentage of free docks based on the historical
+                    data from each <a href="https://www.bicing.barcelona/">Bicing</a> station, a bicycle-sharing system
+                    in Barcelona, Spain.</p>
 
-                    <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.</p>
+                <p>The data used for the prediction was obtained from <a
+                        href="https://opendata-ajuntament.barcelona.cat/">Open Data BCN</a>, providing information on
+                    the number of bicycles and available docks per station between 2020 and 2023. Additionally,
+                    station-specific information such as the total number of docks and their coordinates was included
+                    from <a href="https://drive.google.com/file/d/1MRBWDKh6D5773FfoJYv6vHKBCC1TasVO/view">this file</a>.
+                </p>
 
-                    <p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.</p>
-
-                    <p>A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.</p>
-
-                    <p>For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.</p>
-
-                    <h2 class="section-heading">The Final Frontier</h2>
-
-                    <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
-
-                    <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
-
-                    <blockquote>The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote>
-
-                    <p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.</p>
-
-                    <h2 class="section-heading">Reaching for the Stars</h2>
-
-                    <p>As we got further and further away, it [the Earth] diminished in size. Finally, it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.</p>
-
-                    <a href="#">
-                        <img class="img-responsive" src="img/post-sample-image.jpg" alt="">
-                    </a>
-                    <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
-
-                    <p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.</p>
-
-                    <p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.</p>
-
-                    <p>Placeholder text by <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
+                <h3 class="section-heading" id="processing">Processing</h3>
+                <p>The project used Python for development, emphasizing the handling of large datasets with <a
+                        href="https://www.dask.org/">Dask</a>. Dask was selected for its capability to process data
+                    larger than available memory by parallelizing operations across multiple cores or distributed
+                    computing clusters, providing substantial performance benefits over traditional tools like pandas.
+                </p>
+                <p>Firstly, a Dask DataFrame was created by concatenating raw records from all available months of data,
+                    spanning from January 2020 to December 2023. Below are the initial records from this DataFrame:</p>
+                <div style="overflow-x:auto;">
+                    <table class="dataframe" border="1">
+                        <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>station_id</th>
+                            <th>num_bikes_available</th>
+                            <th>num_bikes_available_types.mechanical</th>
+                            <th>num_bikes_available_types.ebike</th>
+                            <th>num_docks_available</th>
+                            <th>last_reported</th>
+                            <th>is_charging_station</th>
+                            <th>status</th>
+                            <th>is_installed</th>
+                            <th>is_renting</th>
+                            <th>is_returning</th>
+                            <th>last_updated</th>
+                            <th>ttl</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>0</th>
+                            <td>1.0</td>
+                            <td>38.0</td>
+                            <td>35.0</td>
+                            <td>3.0</td>
+                            <td>8</td>
+                            <td>1672527561</td>
+                            <td>True</td>
+                            <td>IN_SERVICE</td>
+                            <td>1.0</td>
+                            <td>1.0</td>
+                            <td>1</td>
+                            <td>1.672528e+09</td>
+                            <td>19.0</td>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <td>2.0</td>
+                            <td>6.0</td>
+                            <td>5.0</td>
+                            <td>1.0</td>
+                            <td>23</td>
+                            <td>1672527391</td>
+                            <td>True</td>
+                            <td>IN_SERVICE</td>
+                            <td>1.0</td>
+                            <td>1.0</td>
+                            <td>1</td>
+                            <td>1.672528e+09</td>
+                            <td>19.0</td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>3.0</td>
+                            <td>20.0</td>
+                            <td>20.0</td>
+                            <td>0.0</td>
+                            <td>7</td>
+                            <td>1672527440</td>
+                            <td>True</td>
+                            <td>IN_SERVICE</td>
+                            <td>1.0</td>
+                            <td>1.0</td>
+                            <td>1</td>
+                            <td>1.672528e+09</td>
+                            <td>19.0</td>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <td>4.0</td>
+                            <td>19.0</td>
+                            <td>19.0</td>
+                            <td>0.0</td>
+                            <td>2</td>
+                            <td>1672527516</td>
+                            <td>True</td>
+                            <td>IN_SERVICE</td>
+                            <td>1.0</td>
+                            <td>1.0</td>
+                            <td>1</td>
+                            <td>1.672528e+09</td>
+                            <td>19.0</td>
+                        </tr>
+                        <tr>
+                            <th>4</th>
+                            <td>5.0</td>
+                            <td>4.0</td>
+                            <td>3.0</td>
+                            <td>1.0</td>
+                            <td>35</td>
+                            <td>1672527342</td>
+                            <td>True</td>
+                            <td>IN_SERVICE</td>
+                            <td>1.0</td>
+                            <td>1.0</td>
+                            <td>1</td>
+                            <td>1.672528e+09</td>
+                            <td>19.0</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
+
+                <p>Next, the records were filtered to keep only the stations in service, and data transformation
+                    began.</p>
+                <p>Initially, the data was processed year by year, identifying discrepancies where records within a year
+                    did not correspond to the year being processed, which led to their exclusion. Subsequently, the hour
+                    from the <i>'last_reported'</i> column was extracted, and the percentage of free docks
+                    (<i>'pct_free_docks'</i>) was computed using the columns <i>'num_docks_available'</i> and <i>'num_bikes_available'</i>.
+                    This resulted in a new dataframe where data was grouped to calculate the average free docks per
+                    station-hour.</p>
+                <p>Finally, fields for the percentage of free docks from each of the previous 4 hours per record were
+                    added, along with date-related columns formatted to match the required output format for prediction.
+                    This process generated a file for each year in the format <i>{year}_processed_file.csv</i> with
+                    processed data, as shown below:</p>
+                <div style="overflow-x:auto;">
+                    <table class="dataframe" border="1">
+                        <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>station_id</th>
+                            <th>sum_date</th>
+                            <th>pct_free_docks</th>
+                            <th>year</th>
+                            <th>month</th>
+                            <th>day</th>
+                            <th>hour</th>
+                            <th>ct1</th>
+                            <th>ct2</th>
+                            <th>ct3</th>
+                            <th>ct4</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>0</th>
+                            <td>52.0</td>
+                            <td>2023-01-01 02:00:00</td>
+                            <td>0.341667</td>
+                            <td>2023</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>0.347222</td>
+                            <td>0.423563</td>
+                            <td>0.267337</td>
+                            <td>0.266667</td>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <td>52.0</td>
+                            <td>2023-01-01 07:00:00</td>
+                            <td>0.483333</td>
+                            <td>2023</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>7</td>
+                            <td>0.552778</td>
+                            <td>0.558333</td>
+                            <td>0.527778</td>
+                            <td>0.466667</td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>52.0</td>
+                            <td>2023-01-01 12:00:00</td>
+                            <td>0.417720</td>
+                            <td>2023</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>12</td>
+                            <td>0.408333</td>
+                            <td>0.444444</td>
+                            <td>0.486111</td>
+                            <td>0.483333</td>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <td>52.0</td>
+                            <td>2023-01-01 17:00:00</td>
+                            <td>0.239559</td>
+                            <td>2023</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>17</td>
+                            <td>0.286111</td>
+                            <td>0.266667</td>
+                            <td>0.327778</td>
+                            <td>0.344444</td>
+                        </tr>
+                        <tr>
+                            <th>4</th>
+                            <td>52.0</td>
+                            <td>2023-01-01 22:00:00</td>
+                            <td>0.591667</td>
+                            <td>2023</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>22</td>
+                            <td>0.586111</td>
+                            <td>0.516667</td>
+                            <td>0.433333</td>
+                            <td>0.348276</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3 class="section-heading" id="enrichment">Enrichment</h3>
+                <p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they
+                    set eye on the earth.</p>
+
+                <h3 class="section-heading" id="explore">Exploration</h3>
+                <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no
+                    turning back from science. The early warnings about technological dangers also come from
+                    science.</p>
+
+                <h3 class="section-heading" id="prediction">Prediction</h3>
+                <p>A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her
+                    protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could
+                    not help but love and cherish her.</p>
+
+                <h3 class="section-heading" id="cases">Study Cases</h3>
+                <p>For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who
+                    will, the experience most certainly changes your perspective. The things that we share in our world
+                    are far more valuable than those which divide us.</p>
+
+                <h2 class="section-heading">The Final Frontier</h2>
+
+                <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it
+                    is a task to occupy the generations. And no matter how much progress one makes, there is always the
+                    thrill of just beginning.</p>
+
+                <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it
+                    is a task to occupy the generations. And no matter how much progress one makes, there is always the
+                    thrill of just beginning.</p>
+
+                <blockquote>The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not
+                    yet mastered prophecy. We predict too much for the next year and yet far too little for the next
+                    ten.
+                </blockquote>
+
+                <p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a
+                    historical process which mankind is carrying out in accordance with the natural laws of human
+                    development.</p>
+
+                <h2 class="section-heading">Reaching for the Stars</h2>
+
+                <p>As we got further and further away, it [the Earth] diminished in size. Finally, it shrank to the size
+                    of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so
+                    fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing
+                    this has to change a man.</p>
+
+                <a href="#">
+                    <img class="img-responsive" src="img/post-sample-image.jpg" alt="">
+                </a>
+                <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
+
+                <p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission:
+                    to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man
+                    has gone before.</p>
+
+                <p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental
+                    truth to our nature, Man must explore, and this is exploration at its greatest.</p>
+
+                <p>Placeholder text by <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by <a
+                        href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
             </div>
         </div>
-    </article>
+    </div>
+</article>
 
-    <hr>
+<hr>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+<!-- Footer -->
+<footer>
+    <div class="container">
+    </div>
+</footer>
 
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+<!-- jQuery -->
+<script src="vendor/jquery/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Theme JavaScript -->
-    <script src="js/clean-blog.min.js"></script>
+<!-- Theme JavaScript -->
+<script src="js/clean-blog.min.js"></script>
 
 </body>
 
