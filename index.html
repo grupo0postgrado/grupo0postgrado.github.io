@@ -116,7 +116,7 @@
                 <p>Firstly, a Dask DataFrame was created by concatenating raw records from all available months of data,
                     spanning from January 2020 to December 2023. Below are the initial records from this DataFrame:</p>
                 <div style="overflow-x:auto;">
-                    <table class="dataframe" border="1">
+                    <table class="dataframe">
                         <thead>
                         <tr>
                             <th>&nbsp;</th>
@@ -230,10 +230,10 @@
                     station-hour.</p>
                 <p>Finally, fields for the percentage of free docks from each of the previous 4 hours per record were
                     added, along with date-related columns formatted to match the required output format for prediction.
-                    This process generated a file for each year in the format <i>{year}_processed_file.csv</i> with
-                    processed data, as shown below:</p>
+                    This process generated a <i>{year}_processed_file.csv</i> for every year with the processed data, as
+                    shown below:</p>
                 <div style="overflow-x:auto;">
-                    <table class="dataframe" border="1">
+                    <table class="dataframe">
                         <thead>
                         <tr>
                             <th>&nbsp;</th>
@@ -324,14 +324,69 @@
                         </tbody>
                     </table>
                 </div>
-                <h3 class="section-heading" id="enrichment">Enrichment</h3>
-                <p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they
-                    set eye on the earth.</p>
+                <p>These dataframes, grouped by station-hour and separated by year, allow for easier manipulation. For
+                    training the models, data from 2021 and 2022 was used, while data from 2023 was reserved for
+                    validation. The year 2020 was excluded due to its significantly different behavior compared to the
+                    other years, as detailed in the Exploration section below.</p>
+                <p>Station-specific data was also added to incorporate geographical and operational details for each
+                    station. Additional datasets believed to provide valuable insights into analyzing dock availability
+                    patterns were included as well. These contributions will be elaborated upon in detail in the
+                    Enrichment section.</p>
 
+                <h3 class="section-heading" id="enrichment">Enrichment</h3>
+                <p>Firstly, additional time-related columns were incorporated, including:
+                <ul>
+                    <li>Day of the week</li>
+                    <li>Time of day (Morning, Afternoon, Evening, Night)</li>
+                </ul>
+                </p>
+                <p>Additionally, a column indicating public holidays was added, using the public <a
+                        href="https://opendata-ajuntament.barcelona.cat/data/en/dataset/calendari-festes-laborals">holiday
+                    calendar of Catalonia</a>. This was based on the hypothesis that Bicing bikes usage strongly depends
+                    on time of day and work/school days.</p>
+                <p>Furthermore, to enrich the dataset with more geographical information, columns related to
+                    neighborhoods were included, sourced from <a
+                            href="https://opendata-ajuntament.barcelona.cat/data/es/dataset/20170706-districtes-barris">Open
+                        Data BCN</a>. These additions are presumed to provide insights into different usage patterns
+                    across geographic areas.</p>
+                <p>Lastly, weather information from <a href="https://www.meteo.cat/">meteo.cat</a> was included to
+                    supplement the dataset with climatic conditions, which are believed to significantly influence bikes
+                    usage. The inclusion of weather data aims to understand if and how conditions like rain impact
+                    Bicing usage patterns.</p>
+                <p>To enrich the dataset, scikit-learn pipelines were used. This approach allowed for the consistent and
+                    efficient application of all data transformations, scaling of numerical features, encoding and
+                    addition of new time-related and geographical columns to any other dataset with the same input
+                    format. It simplified the workflow and ensured reproducibility.</p>
+                <p>Firstly, a merging pipeline was created to add all the attributes believed to enhance prediction
+                    accuracy. This pipeline also included a step to discard records with null values, ensuring that the
+                    dataset remains clean and reliable for analysis. Secondly, an encoding pipeline was defined. For
+                    categorical variables, One-Hot Encoding was used, while for numerical variables, a SimpleImputer
+                    with a median replacement strategy and a StandardScaler were applied to ensure comparability of
+                    attributes.</p>
+                <p>With these two pipelines, a dataset of 95 attributes was generated for training predictive models.
+                    These variables correspond to the encoding of the following original features:</p>
+                <ul>
+                    <li>Day of the week</li>
+                    <li>Holiday indicator</li>
+                    <li>Time of day</li>
+                    <li>Month</li>
+                    <li>Neighborhood</li>
+                    <li>Percentage of free docks from 1 to 4 hours before</li>
+                    <li>Average temperature</li>
+                    <li>Average relative humidity</li>
+                    <li>Precipitation</li>
+                    <li>Solar radiation</li>
+                    <li>Average wind speed</li>
+                </ul>
                 <h3 class="section-heading" id="explore">Exploration</h3>
                 <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no
                     turning back from science. The early warnings about technological dangers also come from
                     science.</p>
+                <a href="#">
+                    <img class="img-responsive" src="img/covid_2020.jpg" alt="">
+                </a>
+                <span class="caption text-muted">Monthly comparison of the percentage of free docks between 2020-2023</span>
+
 
                 <h3 class="section-heading" id="prediction">Prediction</h3>
                 <p>A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her
@@ -343,46 +398,10 @@
                     will, the experience most certainly changes your perspective. The things that we share in our world
                     are far more valuable than those which divide us.</p>
 
-                <h2 class="section-heading">The Final Frontier</h2>
-
-                <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it
-                    is a task to occupy the generations. And no matter how much progress one makes, there is always the
-                    thrill of just beginning.</p>
-
-                <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it
-                    is a task to occupy the generations. And no matter how much progress one makes, there is always the
-                    thrill of just beginning.</p>
-
                 <blockquote>The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not
                     yet mastered prophecy. We predict too much for the next year and yet far too little for the next
                     ten.
                 </blockquote>
-
-                <p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a
-                    historical process which mankind is carrying out in accordance with the natural laws of human
-                    development.</p>
-
-                <h2 class="section-heading">Reaching for the Stars</h2>
-
-                <p>As we got further and further away, it [the Earth] diminished in size. Finally, it shrank to the size
-                    of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so
-                    fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing
-                    this has to change a man.</p>
-
-                <a href="#">
-                    <img class="img-responsive" src="img/post-sample-image.jpg" alt="">
-                </a>
-                <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
-
-                <p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission:
-                    to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man
-                    has gone before.</p>
-
-                <p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental
-                    truth to our nature, Man must explore, and this is exploration at its greatest.</p>
-
-                <p>Placeholder text by <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by <a
-                        href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
             </div>
         </div>
     </div>
