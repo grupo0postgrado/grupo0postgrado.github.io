@@ -379,19 +379,24 @@
                     <li>Average wind speed</li>
                 </ul>
                 <h3 class="section-heading" id="explore">Exploration</h3>
-                <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no
-                    turning back from science. The early warnings about technological dangers also come from
-                    science.</p>
+                <p>As background, it is important to note that between March 14, 2020, and June 21, 2020, Spain entered a state of lockdown due to the <a href="https://es.wikipedia.org/wiki/Confinamiento_por_la_pandemia_de_COVID-19_en_Espa%C3%B1a">COVID-19 pandemic</a>. This period is evident in the graph below, where the trend for free docks follows a similar pattern for other years, with an increase from the beginning of the year until the start of the summer season. However, during the lockdown months in 2020, there is a significant decrease.</p>
                 <a href="#">
                     <img class="img-responsive" src="img/covid_2020.jpg" alt="">
                 </a>
                 <span class="caption text-muted">Monthly comparison of the percentage of free docks between 2020-2023</span>
-
+<p>Due to the outlier behavior during the 2020 lockdown, where data significantly deviates from other years, the 2020 data was excluded from model training. This ensures the predictive models are not skewed by pandemic-related anomalies.</p>
 
                 <h3 class="section-heading" id="prediction">Prediction</h3>
-                <p>A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her
-                    protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could
-                    not help but love and cherish her.</p>
+                <h3 class="subsection-heading">Linear regression</h3>
+                <p>Firstly, a simple linear regression was developed. The following graph represents the absolute values of the coefficients for each attribute based on the training data:</p>
+<a href="#">
+                    <img class="img-responsive" src="img/coefs_lin_reg.jpg" alt="">
+                </a>
+<p>The most significant attributes for the model, as anticipated, are the percentages of free docks from the two preceding hours, underscoring the strong temporal correlation between past and future availability. Additionally, several neighborhoods emerge as important factors, indicating a geographical relationship with bike usage patterns. Conversely, the regression assigns minimal importance to meteorological data. This suggests that weather effects might be indirectly captured within the autoregressive variables, reducing their direct impact on the model.</p>
+                <p>Next, when testing the trained model on the validation data, the following performance metrics were obtained:</p>
+                <blockquote>R^2 Score: 0.8375777661567385<br>
+                    RMSE: 0.11281038105252036
+                </blockquote>
 
                 <h3 class="section-heading" id="cases">Study Cases</h3>
                 <p>For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who
