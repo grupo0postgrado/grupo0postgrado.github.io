@@ -406,49 +406,14 @@
                     within the autoregressive variables, reducing their direct impact on the model.</p>
                 <p>Next, when testing the trained model on the validation data, the following performance metrics were
                     obtained:</p>
-                <blockquote>R^2 Score: 0.8375777661567385<br>
-                    RMSE: 0.11281038105252036
-                </blockquote>
+                <blockquote>R<sup>2</sup> Score: 0.8375777661567385<br>RMSE: 0.11281038105252036</blockquote>
+                 <h3 class="subsection-heading">Decision tree</h3>
+                <p></p>
+                <blockquote>R<sup>2</sup> Score: 0.8398080067891416<br>RMSE: 0.11235802299216152</blockquote>
+                <h3 class="subsection-heading">KNN</h3>
+                <blockquote>R<sup>2</sup> Score: 0.833797321941766<br>RMSE: 0.11508586885262358</blockquote>
                 <h3 class="section-heading" id="cases">Study Cases</h3>
-                <h3 class="subsection-heading">Case 1: E-bikes distribution</h3>
-                <p>One topic meriting further exploration is the geographic distribution of electric bikes across
-                    different time frames. To facilitate this analysis, the most recent 2023 data was reprocessed to
-                    include columns detailing the mean number of electric and mechanical bikes.</p>
-                <p>Using <a href="https://altair.com/">Altair</a>, a Python library to create concise and interactive
-                    visualizations, a series of map plots were crafted to illustrate the distribution of electric bikes
-                    across various zones in Barcelona. Each visualization comprises four distinct maps, corresponding to
-                    different times of the day: morning, afternoon, evening, and night. Additionally, these plots can be
-                    filtered by season and type of day, distinguishing between workdays and holidays.</p>
-                <iframe class="charts-iteractive" src="img/ebikes_interactive.html"></iframe>
-                <span class="caption text-muted">Average number of ebikes by neighborhood/time of day - interactive filter by day type/season </span>
-                <p>Parallel visualizations were generated for the average number of mechanical bikes, highliting the
-                    contrasting geographic distribution patterns between electric and mechanical bikes.</p>
-                <iframe class="charts-iteractive" src="img/mechbikes_interactive.html"></iframe>
-                <span class="caption text-muted">Average number of mechanical bikes by neighborhood/time of day - interactive filter by day type/season </span>
-                <p>To narrow down the exploration of ebikes, further analysis focused on the working days of the summer
-                    period, which shows significant contrasts. As the map of illustrates, while the afternoon
-                    distribution is fairly even, in the evening, electric bikes tend to concentrate in higher-altitude,
-                    primarily residential areas such as Camp d'en Grassot i Gràcia Nova, El Guinardó and El Baix
-                    Guinardó. This leaves central and coastal zones with electric bike values lower than one.</p>
-                <p>Moreover, neighborhoods with the fewest electric bikes during the evening and night in summer were
-                    identified via filtering: El Barri Gòtic, Sant Pere, Santa Caterina i la Ribera, La Vila Olímpica
-                    del Poblenou and La Barceloneta. Additionally, 20% stations with the least electric bikes
-                    available for the given season were visualized on the following map.</p>
-                <iframe class="charts" src="img/least_ebikes.html"></iframe>
-                <span class="caption text-muted">20% of stations with the least ebikes in summer by time of the day</span>
-                <p>Next, linear plots were employed to illustrate the patterns within these specific neighborhoods and
-                    to pinpoint peak hours with a dearth of ebikes. Despite the variations in hourly patterns across
-                    zones, it is observed a low average number of bikes, fewer than two per station, for every station
-                    and season, starting at 18:00 hrs. And particularly, for the summer season the average number is
-                    lower than one ebike at every station since 20:00 hrs</p>
-                <img class="img-container" src="img/least_ebikes_stations.jpg">
-                <span class="caption text-muted">Mean number of ebikes by season-hour for the neighborhoods with the fewest ebikes during the summer evenings and nights</span>
-                <p>From this preliminary investigation, we propose enhancing the distribution of electric bikes for
-                    selected areas during the summer months. For example, reserving a specific number of bikes
-                    exclusively for the time frame beginning at 20:00. This strategy would enable users to access
-                    electric bicycles for returning to high-altitude neighborhoods in the evening and particularly at
-                    night, when other public transportation services are reduced.</p>
-                <h3 class="subsection-heading">Case 2: Clustering of stations based on % free docks across time</h3>
+                <h3 class="subsection-heading">Case 1: Clustering of stations based on % free docks across time</h3>
                 <h3 class="subsection-subtitle">1. Introduction</h3>
                 <p>To uncover distinct patterns of occupation over time, we conducted an unsupervised clustering
                     analysis of the stations based on the percentage of free docks throughout 2023. We began by
@@ -484,7 +449,7 @@
                 <span class="caption text-muted">PCA loadings for PC1 and PC2</span>
                 <p>All the months and days of the week showed similar loadings to the first components, except for
                     January and February, which had a lower contribution.</p>
-                <p>Next, the silhouette score was estimate for 2 to 10 clusters in order to determine the most optimal
+                <p>Next, the silhouette score was estimated for 2 to 10 clusters in order to determine the most optimal
                     partition.</p>
                 <div class="img-container">
                     <img class="single-img" src="img/silhouette_score.jpg">
@@ -580,6 +545,48 @@
                     surrounding areas. We suggest increasing the connectivity of certain areas, especially those in the
                     northern part of the city that present lower usage in general, by adding more bike lanes to
                     encourage people to use bikes.</p>
+                <h3 class="subsection-heading">Case 2: E-bikes distribution</h3>
+                <h3 class="subsection-subtitle">1. Introduction</h3>
+                <p>One topic meriting further exploration is the geographic distribution of electric bikes across
+                    different time frames. To facilitate this analysis, the most recent 2023 data was reprocessed to
+                    include columns detailing the mean number of electric and mechanical bikes.</p>
+                <h3 class="subsection-subtitle">2. Interactive visualization and filtering</h3>
+                <p>Using <a href="https://altair.com/">Altair</a>, a Python library to create concise and interactive
+                    visualizations, a series of map plots were crafted to illustrate the distribution of electric bikes
+                    across various zones in Barcelona. Each visualization comprises four distinct maps, corresponding to
+                    different times of the day: morning, afternoon, evening, and night. Additionally, these plots can be
+                    filtered by season and type of day, distinguishing between workdays and holidays.</p>
+                <iframe class="charts-iteractive" src="img/ebikes_interactive.html"></iframe>
+                <span class="caption text-muted">Average number of ebikes by neighborhood/time of day - interactive filter by day type/season </span>
+                <p>Parallel visualizations were generated for the average number of mechanical bikes, highliting the
+                    contrasting geographic distribution patterns between electric and mechanical bikes.</p>
+                <iframe class="charts-iteractive" src="img/mechbikes_interactive.html"></iframe>
+                <span class="caption text-muted">Average number of mechanical bikes by neighborhood/time of day - interactive filter by day type/season </span>
+                <h3 class="subsection-subtitle">3. Summer period exploration</h3>
+                <p>To narrow down the exploration of ebikes, further analysis focused on the working days of the summer
+                    period, which shows significant contrasts. As the map of illustrates, while the afternoon
+                    distribution is fairly even, in the evening, electric bikes tend to concentrate in higher-altitude,
+                    primarily residential areas such as Camp d'en Grassot i Gràcia Nova, El Guinardó and El Baix
+                    Guinardó. This leaves central and coastal zones with electric bike values lower than one.</p>
+                <p>Moreover, neighborhoods with the fewest electric bikes during the evening and night in summer were
+                    identified via filtering: El Barri Gòtic, Sant Pere, Santa Caterina i la Ribera, La Vila Olímpica
+                    del Poblenou and La Barceloneta. Additionally, 20% stations with the least electric bikes
+                    available for the given season were visualized on the following map.</p>
+                <iframe class="charts" src="img/least_ebikes.html"></iframe>
+                <span class="caption text-muted">20% of stations with the least ebikes in summer by time of the day</span>
+                <p>Next, linear plots were employed to illustrate the patterns within these specific neighborhoods and
+                    to pinpoint peak hours with a dearth of ebikes. Despite the variations in hourly patterns across
+                    zones, it is observed a low average number of bikes, fewer than two per station, for every station
+                    and season, starting at 18:00 hrs. And particularly, for the summer season the average number is
+                    lower than one ebike at every station since 20 h.</p>
+                <img class="img-container" src="img/least_ebikes_stations.jpg">
+                <span class="caption text-muted">Mean number of ebikes by season-hour for the neighborhoods with the fewest ebikes during the summer evenings and nights</span>
+                <h3 class="subsection-subtitle">4. Conclusions</h3>
+                <p>From this preliminary investigation, we propose enhancing the distribution of electric bikes for
+                    selected areas during the summer months. For example, reserving a specific number of bikes
+                    exclusively for the time frame beginning at 20 h. This strategy would enable users to access
+                    electric bicycles for returning to high-altitude neighborhoods in the evening and particularly at
+                    night, when other public transportation services are reduced.</p>
             </div>
         </div>
     </div>

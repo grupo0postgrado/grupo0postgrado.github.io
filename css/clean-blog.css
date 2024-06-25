@@ -461,12 +461,10 @@ tr:nth-child(even) {
   justify-content: center;
   width: 100%;
   height: auto;
+  object-fit: cover;
 }
 .single-img {
-  width: 700px;
+  width: 90%;
   height: auto;
-}
-.map-img {
-  width: 100%;
-  height: auto;
+  object-fit: cover;
 }
