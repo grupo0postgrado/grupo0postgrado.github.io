@@ -56,10 +56,10 @@
                     <a href="#processing">Processing</a>
                 </li>
                 <li>
-                    <a href="#enrichment">Enrichment</a>
+                    <a href="#explore">Exploration</a>
                 </li>
                 <li>
-                    <a href="#explore">Exploration</a>
+                    <a href="#enrichment">Enrichment</a>
                 </li>
                 <li>
                     <a href="#prediction">Prediction</a>
@@ -82,7 +82,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>Bike Availability Prediction</h1>
+                    <h1>Bike availability prediction</h1>
                     <h2 class="subheading">Introduction to Data Science and Machine Learning</h2>
                     <span class="meta">Universitat de Barcelona, 26 de junio 2024</span>
                 </div>
@@ -329,7 +329,21 @@
                     station. Additional datasets believed to provide valuable insights into analyzing dock availability
                     patterns were included as well. These contributions will be elaborated upon in detail in the
                     Enrichment section.</p>
-
+                <h3 class="section-heading" id="explore">Exploration</h3>
+                <p>As background, it is important to note that between March 14, 2020, and June 21, 2020, Spain entered
+                    a state of lockdown due to the <a
+                            href="https://es.wikipedia.org/wiki/Confinamiento_por_la_pandemia_de_COVID-19_en_Espa%C3%B1a">COVID-19
+                        pandemic</a>. This period is evident in the graph below, where the trend for free docks follows
+                    a similar pattern for other years, with an increase from the beginning of the year until the start
+                    of the summer. However, during the lockdown months in 2020, there is a significant decrease.
+                </p>
+                <div class="img-container">
+                    <img class="single-img" src="img/covid_2020.jpg" alt="">
+                </div>
+                <span class="caption text-muted">Monthly comparison of the percentage of free docks between 2020-2023</span>
+                <p>Due to the outlier behavior during the 2020 lockdown, where data significantly deviates from other
+                    years, the 2020 data was excluded from model training. This ensures the predictive models are not
+                    skewed by pandemic-related anomalies.</p>
                 <h3 class="section-heading" id="enrichment">Enrichment</h3>
                 <p>Firstly, additional time-related columns were incorporated, including:</p>
                 <ul>
@@ -374,21 +388,6 @@
                     <li>Solar radiation</li>
                     <li>Average wind speed</li>
                 </ul>
-                <h3 class="section-heading" id="explore">Exploration</h3>
-                <p>As background, it is important to note that between March 14, 2020, and June 21, 2020, Spain entered
-                    a state of lockdown due to the <a
-                            href="https://es.wikipedia.org/wiki/Confinamiento_por_la_pandemia_de_COVID-19_en_Espa%C3%B1a">COVID-19
-                        pandemic</a>. This period is evident in the graph below, where the trend for free docks follows
-                    a similar pattern for other years, with an increase from the beginning of the year until the start
-                    of the summer. However, during the lockdown months in 2020, there is a significant decrease.
-                </p>
-                <div class="img-container">
-                    <img class="single-img" src="img/covid_2020.jpg" alt="">
-                </div>
-                <span class="caption text-muted">Monthly comparison of the percentage of free docks between 2020-2023</span>
-                <p>Due to the outlier behavior during the 2020 lockdown, where data significantly deviates from other
-                    years, the 2020 data was excluded from model training. This ensures the predictive models are not
-                    skewed by pandemic-related anomalies.</p>
                 <h3 class="section-heading" id="prediction">Prediction</h3>
                 <h3 class="subsection-heading">Linear regression</h3>
                 <p>Firstly, a simple linear regression was developed. The following graph represents the absolute values
@@ -419,14 +418,45 @@
                     RMSE and R-squared, did not improve over the linear regression model, indicating that the linear
                     approach was more effective for predicting dock availability.</p>
                 <h3 class="subsection-heading">Decision tree</h3>
-                <p>
-                    A Decision Tree model was trained using Grid Search to optimize parameters, resulting in slightly
+                <p>A Decision Tree model was trained using Grid Search to optimize parameters, resulting in slightly
                     better performance than linear regression. The optimal parameters found were max_depth=10,
                     min_samples_leaf=4, and min_samples_split=10. Metrics obtained include:</p>
                 <blockquote>R-squared: 0.8398080067891416<br>RMSE: 0.11235802299216152</blockquote>
                 <p>These results indicate that the Decision Tree model, with its ability to capture complex
                     relationships in the data, provided a slightly improved prediction for dock availability compared to
                     linear regression.</p>
+                <h3 class="subsection-heading">More enrichment</h3>
+                <p>In examining factors that could influence bicycle availability, we considered the proximity to
+                    different types of integrated public transportation. The hypothesis is that the Bicing service acts
+                    as a complement within the transportation infrastructure, implying that docks with a higher number
+                    of nearby integrated transportation stations would have a lower percentage of free docks.</p>
+                <p>To investigate this, the same data used in other scenarios was enriched with the location of various
+                    transportation stations (excluding buses). A new feature was added based on the number of nearby
+                    stations, categorizing docks as having “No,” “Normal,” or “Full” connection to the public
+                    transportation network. This feature was integrated into the initial dataset based on the
+                    station_id, giving each dock this additional characteristic for model training.</p>
+                <p>Data transformation and merging were performed, resulting in graphs showing the distribution before
+                    and after applying this logic. Three scenarios were considered, each with a maximum reference
+                    distance between a dock and a public transportation station: 250m, 400m, and 500m. The applied logic
+                    was as follows:</p>
+                <ul>
+                    <li>0 stations → “None”</li>
+                    <li>1-8 stations → “Normal”</li>
+                    <li>9+ stations → “Full”</li>
+                </ul>
+                <p>Each scenario was tested, but no significant impact on the model was observed. For example, with a
+                    500m distance, linear regression results were:</p>
+                <blockquote>R-squared: 0.8375784920214753<br>RMSE: 0.11281012897752091</blockquote>
+                <p>The improvement was minimal compared to the main exercise, suggesting that this new feature could be
+                    omitted, and the original model maintained. Experiments with other models, such as Decision Trees
+                    with Grid Search, worsened the results.</p>
+                <p>Although no significant effect was noted, this opens the possibility of exploring other approaches to
+                    understand the dynamics between different modes of transportation. There might be modal competition,
+                    as suggested by L.M. Braun et al. in their paper “Short-term planning and policy interventions to
+                    promote cycling in urban centers: Findings from a commute mode choice analysis in Barcelona, Spain”
+                    (Transportation Research Part A, 2016). Their results indicate a negative correlation between
+                    cycling and the availability of public transportation, implying that more nearby transport stations
+                    could lead to a higher percentage of free docks.</p>
                 <h3 class="section-heading" id="cases">Study Cases</h3>
                 <h3 class="subsection-heading">Case 1: Clustering of stations based on % free docks across time</h3>
                 <h3 class="subsection-subtitle">1. Introduction</h3>
@@ -611,7 +641,7 @@
 
 <!-- Footer -->
 <footer>
-    <div class="container">
+    <div class="footer">
     </div>
 </footer>
 
