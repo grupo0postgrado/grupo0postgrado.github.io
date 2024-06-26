@@ -77,7 +77,7 @@
 <!-- Page Header -->
 <!-- Set your background image for this header on the line below. -->
 <header class="intro-header">
-    <img class="header-background" src="img/portada_bicing.jpg"/>
+    <img class="header-background" src="img/portada_bicing.jpg" alt="">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -331,12 +331,11 @@
                     Enrichment section.</p>
 
                 <h3 class="section-heading" id="enrichment">Enrichment</h3>
-                <p>Firstly, additional time-related columns were incorporated, including:
+                <p>Firstly, additional time-related columns were incorporated, including:</p>
                 <ul>
                     <li>Day of the week</li>
                     <li>Time of day (Morning, Afternoon, Evening, Night)</li>
                 </ul>
-                </p>
                 <p>Additionally, a column indicating public holidays was added, using the public <a
                         href="https://opendata-ajuntament.barcelona.cat/data/en/dataset/calendari-festes-laborals">holiday
                     calendar of Catalonia</a>. This was based on the hypothesis that Bicing bikes usage strongly depends
@@ -381,10 +380,10 @@
                             href="https://es.wikipedia.org/wiki/Confinamiento_por_la_pandemia_de_COVID-19_en_Espa%C3%B1a">COVID-19
                         pandemic</a>. This period is evident in the graph below, where the trend for free docks follows
                     a similar pattern for other years, with an increase from the beginning of the year until the start
-                    of the summer season. However, during the lockdown months in 2020, there is a significant decrease.
+                    of the summer. However, during the lockdown months in 2020, there is a significant decrease.
                 </p>
                 <div class="img-container">
-                    <img class="single-img" src="img/covid_2020.jpg">
+                    <img class="single-img" src="img/covid_2020.jpg" alt="">
                 </div>
                 <span class="caption text-muted">Monthly comparison of the percentage of free docks between 2020-2023</span>
                 <p>Due to the outlier behavior during the 2020 lockdown, where data significantly deviates from other
@@ -395,7 +394,7 @@
                 <p>Firstly, a simple linear regression was developed. The following graph represents the absolute values
                     of the coefficients for each attribute based on the training data:</p>
                 <div class="img-container">
-                    <img class="single-img" src="img/coefs_lin_reg.jpg">
+                    <img class="single-img" src="img/coefs_lin_reg.jpg" alt="">
                 </div>
                 <span class="caption text-muted">Linear regression absolute value coefficients</span>
                 <p>The most significant attributes for the model, as anticipated, are the percentages of free docks from
@@ -406,12 +405,28 @@
                     within the autoregressive variables, reducing their direct impact on the model.</p>
                 <p>Next, when testing the trained model on the validation data, the following performance metrics were
                     obtained:</p>
-                <blockquote>R<sup>2</sup> Score: 0.8375777661567385<br>RMSE: 0.11281038105252036</blockquote>
-                 <h3 class="subsection-heading">Decision tree</h3>
-                <p></p>
-                <blockquote>R<sup>2</sup> Score: 0.8398080067891416<br>RMSE: 0.11235802299216152</blockquote>
+                <blockquote>R-squared: 0.8375777661567385<br>RMSE: 0.11281038105252036</blockquote>
                 <h3 class="subsection-heading">KNN</h3>
-                <blockquote>R<sup>2</sup> Score: 0.833797321941766<br>RMSE: 0.11508586885262358</blockquote>
+                <p>A K-nearest neighbors (KNN) regressor was also trained to compare its performance with the linear
+                    regression model. This algorithm identifies the k-nearest data points in the training set and
+                    predicts the target value based on the average of these neighbors. The following results were
+                    obtained:</p>
+                <blockquote>R-squared: 0.833797321941766<br>RMSE: 0.11508586885262358</blockquote>
+                <p>A K-nearest neighbors (KNN) regressor was also trained, but its performance did not surpass that of
+                    the linear regression model. While KNN can capture non-linear relationships and predict values based
+                    on the average of the k-nearest data points, it requires careful tuning of the 'k' parameter and can
+                    be computationally intensive with larger datasets. In this case, the KNN model's metrics, such as
+                    RMSE and R-squared, did not improve over the linear regression model, indicating that the linear
+                    approach was more effective for predicting dock availability.</p>
+                <h3 class="subsection-heading">Decision tree</h3>
+                <p>
+                    A Decision Tree model was trained using Grid Search to optimize parameters, resulting in slightly
+                    better performance than linear regression. The optimal parameters found were max_depth=10,
+                    min_samples_leaf=4, and min_samples_split=10. Metrics obtained include:</p>
+                <blockquote>R-squared: 0.8398080067891416<br>RMSE: 0.11235802299216152</blockquote>
+                <p>These results indicate that the Decision Tree model, with its ability to capture complex
+                    relationships in the data, provided a slightly improved prediction for dock availability compared to
+                    linear regression.</p>
                 <h3 class="section-heading" id="cases">Study Cases</h3>
                 <h3 class="subsection-heading">Case 1: Clustering of stations based on % free docks across time</h3>
                 <h3 class="subsection-subtitle">1. Introduction</h3>
@@ -435,16 +450,16 @@
                     two first principal components. PC1 almost explained 67% of the variance, while PC2 explained
                     6.62%.</p>
                 <div class="img-container">
-                    <img class="single-img" src="img/clustering_pca.jpg">
+                    <img class="single-img" src="img/clustering_pca.jpg" alt="">
                 </div>
                 <span class="caption text-muted">PCA of % free docks by station, month and day of week</span>
                 <p>Secondly, we checked the loadings of the components, in order to determine the feature contributions
                     (month_dayofweek).</p>
                 <div class="img-container">
-                    <img class="single-img" src="img/pc1_loadings.jpg">
+                    <img class="single-img" src="img/pc1_loadings.jpg" alt="">
                 </div>
                 <div class="img-container">
-                    <img class="single-img" src="img/pc2_loadings.jpg">
+                    <img class="single-img" src="img/pc2_loadings.jpg" alt="">
                 </div>
                 <span class="caption text-muted">PCA loadings for PC1 and PC2</span>
                 <p>All the months and days of the week showed similar loadings to the first components, except for
@@ -452,21 +467,21 @@
                 <p>Next, the silhouette score was estimated for 2 to 10 clusters in order to determine the most optimal
                     partition.</p>
                 <div class="img-container">
-                    <img class="single-img" src="img/silhouette_score.jpg">
+                    <img class="single-img" src="img/silhouette_score.jpg" alt="">
                 </div>
                 <span class="caption text-muted">Silhouette score for different numbers of clusters</span>
                 <p>Finally, a partition of k=2 was chosen as shown in the PCA plot, where the stations are colored based
                     on the clustering belonging.</p>
                 <div class="img-container">
-                    <img class="single-img" src="img/kmedoids_clustering.jpg">
+                    <img class="single-img" src="img/kmedoids_clustering.jpg" alt="">
                 </div>
                 <span class="caption text-muted">K-Medoids clustering on PCA-reduced data</span>
                 <p>We computed the median of % of free docks for each clustering across months and day of the week.</p>
                 <div class="img-container">
-                    <img class="single-img" src="img/clusters_by_month.jpg">
+                    <img class="single-img" src="img/clusters_by_month.jpg" alt="">
                 </div>
                 <div class="img-container">
-                    <img class="single-img" src="img/clusters_by_dayofweek.jpg">
+                    <img class="single-img" src="img/clusters_by_dayofweek.jpg" alt="">
                 </div>
                 <span class="caption text-muted">Mean values of % free docks by month/day of week for each cluster</span>
                 <p>As observed in the barplot, stations in cluster 1 had a higher percentage of free docks independently
@@ -491,24 +506,24 @@
                     group. This time the first component explained 56% of the variance, which is lower than in the
                     working hours setting.</p>
                 <div class="img-container">
-                    <img class="single-img" src="img/kmedoids_clustering_2.jpg">
+                    <img class="single-img" src="img/kmedoids_clustering_2.jpg" alt="">
                 </div>
                 <span class="caption text-muted">K-Medoids clustering on PCA-reduced data</span>
                 <p>We observed that similarly to working hours, the clusters differed in the percentage of free docks
                     across all months and days of the week, being cluster 1, the one with the lowest % of free
                     docks.</p>
                 <div class="img-container">
-                    <img class="single-img" src="img/clusters_by_month_2.jpg">
+                    <img class="single-img" src="img/clusters_by_month_2.jpg" alt="">
                 </div>
                 <div class="img-container">
-                    <img class="single-img" src="img/clusters_by_dayofweek_2.jpg">
+                    <img class="single-img" src="img/clusters_by_dayofweek_2.jpg" alt="">
                 </div>
                 <span class="caption text-muted">Mean values of % free docks by month/day of week for each cluster</span>
                 <p>We finally tried to understand the results, plotting the clusters on the Barcelona map, highlighting
                     the neighborhoods and their corresponding altitude. As shown below, the cluster 0 with higher
                     percentage of free docks, tended to group stations situated in the highlands of the city. However,
                     stations that in the workings hours had a high % of free docks (for instance, the ones near Sagrada
-                    familia, Gràcia, Guinardó and other residential areas), now they are way more occupied. The same
+                    Família, Gràcia, Guinardó and other residential areas), now they are way more occupied. The same
                     pattern can be observed the other way around in some stations right next to the seaside, that now
                     show a higher % of free docks. This could be explained by the fact that people tend to use the bikes
                     to go back home and thus stations in residential areas are more occupied.</p>
@@ -569,7 +584,7 @@
                     primarily residential areas such as Camp d'en Grassot i Gràcia Nova, El Guinardó and El Baix
                     Guinardó. This leaves central and coastal zones with electric bike values lower than one.</p>
                 <p>Moreover, neighborhoods with the fewest electric bikes during the evening and night in summer were
-                    identified via filtering: El Barri Gòtic, Sant Pere, Santa Caterina i la Ribera, La Vila Olímpica
+                    identified via filtering: El Barri Gòtic, Sant Père, Santa Caterina i la Ribera, La Vila Olímpica
                     del Poblenou and La Barceloneta. Additionally, 20% stations with the least electric bikes
                     available for the given season were visualized on the following map.</p>
                 <iframe class="charts" src="img/least_ebikes.html"></iframe>
@@ -577,9 +592,9 @@
                 <p>Next, linear plots were employed to illustrate the patterns within these specific neighborhoods and
                     to pinpoint peak hours with a dearth of ebikes. Despite the variations in hourly patterns across
                     zones, it is observed a low average number of bikes, fewer than two per station, for every station
-                    and season, starting at 18:00 hrs. And particularly, for the summer season the average number is
-                    lower than one ebike at every station since 20 h.</p>
-                <img class="img-container" src="img/least_ebikes_stations.jpg">
+                    and season, starting at 18:00 hrs. And particularly, for the summer the average number is lower than
+                    one ebike at every station since 20 h.</p>
+                <img class="img-container" src="img/least_ebikes_stations.jpg" alt="">
                 <span class="caption text-muted">Mean number of ebikes by season-hour for the neighborhoods with the fewest ebikes during the summer evenings and nights</span>
                 <h3 class="subsection-subtitle">4. Conclusions</h3>
                 <p>From this preliminary investigation, we propose enhancing the distribution of electric bikes for
